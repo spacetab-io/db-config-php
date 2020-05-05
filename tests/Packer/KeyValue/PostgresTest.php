@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Spacetab\Tests\DbConfig\Packer\KeyValue\Amp;
+namespace Spacetab\Tests\DbConfig\Packer\KeyValue;
 
 use PHPUnit\Framework\TestCase;
 use Spacetab\DbConfig\Packer\KeyValue;
@@ -11,10 +11,10 @@ class PostgresTest extends TestCase
 {
     public function testPackerReturnsDefaultConnStringIfConfigIsNull()
     {
-        $packer = new KeyValue\Amp\Postgres();
+        $packer = new KeyValue\Postgres();
         $string = $packer('default', null);
 
-        $this->assertSame('host=127.0.0.1 port=5432 user=postgres db=postgres', $string);
+        $this->assertSame('host=127.0.0.1 port=5432 user=postgres dbname=postgres', $string);
     }
 
     public function invalidValuesProvider()
@@ -39,7 +39,7 @@ class PostgresTest extends TestCase
      */
     public function testPackerThrowsAnExceptionIfProvidedInvalidValues(array $values)
     {
-        $packer = new KeyValue\Amp\Postgres();
+        $packer = new KeyValue\Postgres();
 
         $this->expectException(\InvalidArgumentException::class);
 
@@ -48,7 +48,7 @@ class PostgresTest extends TestCase
 
     public function testMultiServerConfiguration()
     {
-        $packer = new KeyValue\Amp\Postgres();
+        $packer = new KeyValue\Postgres();
         $string = $packer('default', [
             'host' => ['127.0.0.1', '127.0.0.2'],
             'port' => [5432, 6432],
@@ -61,7 +61,7 @@ class PostgresTest extends TestCase
             ],
         ]);
 
-        $valid = 'host=127.0.0.1,127.0.0.2 port=5432,6432 user=roquie db=postgres password=secret schema=postgres sslmode=require connect_timeout=10';
+        $valid = 'host=127.0.0.1,127.0.0.2 port=5432,6432 user=roquie dbname=postgres password=secret schema=postgres sslmode=require connect_timeout=10';
         $this->assertSame($valid, $string);
     }
 }

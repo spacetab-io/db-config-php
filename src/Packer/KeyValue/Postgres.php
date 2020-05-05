@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Spacetab\DbConfig\Packer\KeyValue\Amp;
+namespace Spacetab\DbConfig\Packer\KeyValue;
 
 use Spacetab\DbConfig\Packer\AbstractPacker;
 
@@ -18,7 +18,7 @@ final class Postgres extends AbstractPacker
     public function __invoke(string $connectionName, ?array $config = null): string
     {
         if (is_null($config)) {
-            return 'host=127.0.0.1 port=5432 user=postgres db=postgres';
+            return 'host=127.0.0.1 port=5432 user=postgres dbname=postgres';
         }
 
         $name    = isset($config['name'])    ? $this->validateName($connectionName, $config)    : 'postgres';
@@ -30,10 +30,10 @@ final class Postgres extends AbstractPacker
         $options = isset($config['options']) ? $this->validateOptions($connectionName, $config) : [];
 
         $chunks = [
-            'host=' . join(',', $hosts),
-            'port=' . join(',', $ports),
-            'user=' . $user,
-            'db='   . $name
+            'host='   . join(',', $hosts),
+            'port='   . join(',', $ports),
+            'user='   . $user,
+            'dbname=' . $name
         ];
 
         if (!is_null($pass)) {

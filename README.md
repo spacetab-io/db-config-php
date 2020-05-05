@@ -60,9 +60,9 @@ $config = new Reader([
     ]
 ]);
 
-$config->addPacker('pgsql', new KeyValue\Amp\Postgres());
+$config->addPacker('pgsql', new KeyValue\Postgres());
 $config->getConnectionString($connectionName = 'default'); 
-# host=127.0.0.1,127.0.0.2 port=5432,6432 user=roquie password=secret db=roquie schema=roquie connect_timeout=10 target_session_attrs=any sslmode=require
+# host=127.0.0.1,127.0.0.2 port=5432,6432 user=roquie password=secret dbname=roquie schema=roquie connect_timeout=10 target_session_attrs=any sslmode=require
 ```
 
 Note: Amphp connection string to mysql and postgres clients does not support multiple hosts connection (05-05-2020).

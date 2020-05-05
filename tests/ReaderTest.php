@@ -41,9 +41,9 @@ class ReaderTest extends TestCase
     public function testWhereItReturnsConnectionStringIfPackerExistsButOptionsNot()
     {
         $reader = new Reader();
-        $reader->addPacker('pgsql', new KeyValue\Amp\Postgres());
+        $reader->addPacker('pgsql', new KeyValue\Postgres());
 
-        $this->assertSame('host=127.0.0.1 port=5432 user=postgres db=postgres', $reader->getConnectionString());
+        $this->assertSame('host=127.0.0.1 port=5432 user=postgres dbname=postgres', $reader->getConnectionString());
     }
 
     public function testWhereItReturnsConnectionStringIfPackerExistsWithOptions()
@@ -53,8 +53,8 @@ class ReaderTest extends TestCase
                 'type' => 'pgsql',
             ]
         ]);
-        $reader->addPacker('pgsql', new KeyValue\Amp\Postgres());
+        $reader->addPacker('pgsql', new KeyValue\Postgres());
 
-        $this->assertSame('host=127.0.0.1 port=5432 user=postgres db=postgres', $reader->getConnectionString());
+        $this->assertSame('host=127.0.0.1 port=5432 user=postgres dbname=postgres', $reader->getConnectionString());
     }
 }
