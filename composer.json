@@ -1,0 +1,30 @@
+{
+  "name": "spacetab-io/db-config",
+  "description": "Creates a DSN string from an array. Supports Connection URI's and Connection Key-Value strings.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "roquie",
+      "email": "roquie0@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9",
+    "phpstan/phpstan": "^0.12",
+    "symfony/var-dumper": "^5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Spacetab\\DbConfig\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Spacetab\\Tests\\DbConfig\\": "tests"
+    }
+  }
+}
